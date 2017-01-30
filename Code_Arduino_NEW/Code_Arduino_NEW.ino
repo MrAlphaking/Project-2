@@ -5,8 +5,10 @@
 #define echoPin2 10
 #define trigPin3 9
 #define echoPin3 8
-int right = 3;
-int left = 5;
+//int right = 3;
+//int left = 5;
+Servo left;
+Servo right;
 
 
 void setup() {
@@ -19,87 +21,30 @@ void setup() {
  pinMode(echoPin3, INPUT);
  pinMode(12,OUTPUT);
  pinMode(13,OUTPUT);
-  pinMode(left,OUTPUT);
- pinMode(right,OUTPUT);
+ left.attach(3);
+ right.attach(5);
+ Stop();
  
 }
 
 void loop() {
-    //CW(right);
-    //CCW(left);
- if(sensor0() > 10  /*&& sensor1() <= 13 && sensor2() <= 13*/){ //geen muur voor, muur links
-    CW(right);
-    CW(left);
-  }
-  /*if(sensor0() <= 10){
-    CW(right);
-    CW(left);
-    delay(200);
-  }*/
 
-  /*else if(sensor1() > 13) { //geen muur links
-
-    CW(right);
-    CW(left);
-    delay(300); //draai links
-    
-   if(sensor2() > 13){ //13
-    CCW(right);
-    CCW(left); //draai rechts 90 graden
-    delay(200);
-      
-      if(sensor0() < 10 && sensor2() < 13){ //geen AFGROND voor
-        CW(right);
-        CCW(left);
-      }
-      else {
-        CCW(right);
-        CCW(left); //draai rechts 90 graden
-        delay(200);
-      }
-    }
-    
-    else{ //geen afgrond, rij rechtdoor.
-      CW(right);
-      CCW(left);
-    }
-    
+ if(sensor0() > 8  && sensor1() <= 7 && sensor2() <= 13){ //geen muur voor, muur links
+    vooruit();
   }
 
-    else if(sensor0() <= 10 && sensor1() <= 13){ //muur links, muur voor.
-    
-      CCW(right);
-      CCW(left); //draai rechts 45 graden
-      delay(100);
-     
-    }
-  
-  if(sensor1() <= 13 && sensor2 > 13) { //afgrond voor, geen muur links
-
-    CW(right);
-    CW(left);
-    delay(300); //draai links.
-    
-    
-    if(sensor2() > 13){ //13
-       CCW(right);
-       CCW(left); //draai rechts 1130 graden
-       delay(200);
-    }
-    
-    else{ //geen afgrond
-      CW(right);
-      CCW(left);;
-    } 
-  }*/
+  if(sensor2() > 13){ //geen muur links
+    delay(500);
+    turnLeft();
+  }
 }
-
+ 
 int sensor0(){
   int duration, distance;
   digitalWrite(trigPin1, LOW);  
   delayMicroseconds(2); 
   digitalWrite(trigPin1, HIGH);
-  //delayMicroseconds(10); 
+  delayMicroseconds(10); 
   digitalWrite(trigPin1, LOW);
   duration = pulseIn(echoPin1, HIGH);
   distance = (duration/2) / 29.1;
@@ -145,19 +90,36 @@ int sensor2(){
   }
     return distance;
 }
-void CCW(int motor){
-  digitalWrite(motor, HIGH);
-  delayMicroseconds(2100);
-  digitalWrite(motor,LOW);
+
+void vooruit(){
+ left.writeMicroseconds(1570);
+ right.writeMicroseconds(0);
 }
-void CW(int motor){
-  digitalWrite(motor, HIGH);
-  delayMicroseconds(200);
-  digitalWrite(motor,LOW);
+void Stop(){
+ left.writeMicroseconds(1532);
+ right.writeMicroseconds(1505);
 }
-void STOP(int motor){
-  digitalWrite(motor, HIGH);
-  delayMicroseconds(1150);
-  digitalWrite(motor,LOW);
+void achteruit(){
+ left.writeMicroseconds(1500);
+ right.writeMicroseconds(1900);
 }
+
+void turnRight(){
+ left.writeMicroseconds(1570);
+ right.writeMicroseconds(1590);
+ delay(550);
+ left.writeMicroseconds(1532);
+ right.writeMicroseconds(1505);
+ delay(450);
+}
+
+void turnLeft(){
+ left.writeMicroseconds(1500);
+ right.writeMicroseconds(0);
+ delay(515);
+ left.writeMicroseconds(1532);
+ right.writeMicroseconds(1505);
+ delay(450);
+}
+
 
