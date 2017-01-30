@@ -10,7 +10,7 @@
 Servo left;
 Servo right;
 
-
+//hoi
 void setup() {
  Serial.begin (9600);
  pinMode(trigPin1, OUTPUT);
