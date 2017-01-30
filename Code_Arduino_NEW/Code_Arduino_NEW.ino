@@ -29,7 +29,7 @@ void setup() {
 
 void loop() {
 
- if(sensor0() > 8  && sensor1() <= 7 && sensor2() <= 13){ //geen muur voor, muur links
+ if((sensor0() > 10 || sensor1() < 7) && sensor2() <= 13){ //geen muur voor, muur links
     vooruit();
   }
 
@@ -37,10 +37,10 @@ void loop() {
     delay(550);
     turnLeft();
     vooruit();
-    delay(550);
+    delay(450);
   }
 
-  if((sensor0() <= 8 || sensor1() > 7) && sensor2() <=13){ //muur voor of afgrond voor en muur links
+  if((sensor0() <= 10 || sensor1() >= 7) && sensor2() <=13){ //muur voor of afgrond voor en muur links
     turnRight();
   }
   
@@ -114,7 +114,7 @@ void achteruit(){
 void turnRight(){
  left.writeMicroseconds(1570);
  right.writeMicroseconds(1590);
- delay(550);
+ delay(585);
  left.writeMicroseconds(1532);
  right.writeMicroseconds(1505);
  delay(450);
@@ -123,7 +123,7 @@ void turnRight(){
 void turnLeft(){
  left.writeMicroseconds(1500);
  right.writeMicroseconds(0);
- delay(515);
+ delay(525);
  left.writeMicroseconds(1532);
  right.writeMicroseconds(1505);
  delay(450);
