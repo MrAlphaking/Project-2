@@ -28,26 +28,44 @@ void setup() {
 }
 
 void loop() {
-
+  sensor0();
+  delay(2000);
+  sensor1();
+  delay(2000);
+  sensor2();
+  delay(2000);
+  /*
  if((sensor0() > 10 || sensor1() < 7) && sensor2() <= 13){ //geen muur voor, muur links
     vooruit();
   }
 
-  if(sensor2() > 13){ //geen muur links   
+  if(sensor2() > 13){ //geen muur links 
     delay(550);
     turnLeft();
     vooruit();
-<<<<<<< HEAD
+    delay(200);
+    if(sensor1() > 7){
+        achteruit();
+        delay(100);
+        turnRight();
+    }
+    else{
+    delay(340);
+    turnLeft();
+    vooruit();
     delay(500);
-=======
-    delay(450);
->>>>>>> origin/master
+    }*/
+    /*
+    delay(550);
+    turnLeft();
+    vooruit();
+    delay(500);*//*
   }
 
   if((sensor0() <= 10 || sensor1() >= 7) && sensor2() <=13){ //muur voor of afgrond voor en muur links
     turnRight();
   }
-  
+  */
 }
  
 int sensor0(){
