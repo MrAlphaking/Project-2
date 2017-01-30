@@ -38,7 +38,7 @@ void loop() {
     turnLeft();
   }
 }
- 
+ //thomas is mijn master
 int sensor0(){
   int duration, distance;
   digitalWrite(trigPin1, LOW);  
