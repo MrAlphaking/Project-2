@@ -7,10 +7,10 @@
 #define echoPin3 8
 //int right = 3;
 //int left = 5;
+int a = 100;
 Servo left;
 Servo right;
 
-//hoi
 void setup() {
  Serial.begin (9600);
  pinMode(trigPin1, OUTPUT);
@@ -33,12 +33,19 @@ void loop() {
     vooruit();
   }
 
-  if(sensor2() > 13){ //geen muur links
-    delay(500);
+  if(sensor2() > 13){ //geen muur links   
+    delay(550);
     turnLeft();
+    vooruit();
+    delay(550);
   }
+
+  if((sensor0() <= 8 || sensor1() > 7) && sensor2() <=13){ //muur voor of afgrond voor en muur links
+    turnRight();
+  }
+  
 }
- //thomas is mijn master
+ 
 int sensor0(){
   int duration, distance;
   digitalWrite(trigPin1, LOW);  
