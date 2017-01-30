@@ -37,7 +37,11 @@ void loop() {
     delay(550);
     turnLeft();
     vooruit();
+<<<<<<< HEAD
     delay(500);
+=======
+    delay(450);
+>>>>>>> origin/master
   }
 
   if((sensor0() <= 10 || sensor1() >= 7) && sensor2() <=13){ //muur voor of afgrond voor en muur links
