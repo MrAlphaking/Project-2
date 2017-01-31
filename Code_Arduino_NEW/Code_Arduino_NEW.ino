@@ -5,9 +5,6 @@
 #define echoPin2 10
 #define trigPin3 9
 #define echoPin3 8
-//int right = 3;
-//int left = 5;
-int a = 100;
 Servo left;
 Servo right;
 
@@ -28,46 +25,55 @@ void setup() {
 }
 
 void loop() {
-  sensor0();
-  delay(2000);
-  sensor1();
-  delay(2000);
-  sensor2();
-  delay(2000);
-  /*
- if((sensor0() > 10 || sensor1() < 7) && sensor2() <= 13){ //geen muur voor, muur links
-    vooruit();
-  }
+ if(sensor0() > 8 || sensor1() < 9){ //geen muur of geen afgrond voor.
 
-  if(sensor2() > 13){ //geen muur links 
-    delay(550);
+  if(sensor2() <= 13){ //muur links.
+   center();
+  }
+  
+  else if(sensor2() > 13){ //geen muur links.
+    vooruit();
+    delay(430);
     turnLeft();
+    vooruit();
+    delay(430);
+  }
+ }
+
+
+ if((sensor0() < 8 && sensor0() > 0 || sensor1() >= 9) && sensor2() <= 13 ){ //muur of afgrond en muur links.
+  
+    if(sensor1() >= 9) { //indien afgrond ga eerst achteruit.
+      achteruit();
+      delay(400);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+   }
+
+   turnRight();
+   vooruit();
+   delay(500);
+   if (sensor0() > 8){
     vooruit();
     delay(200);
-    if(sensor1() > 7){
-        achteruit();
-        delay(100);
-        turnRight();
-    }
-    else{
-    delay(340);
-    turnLeft();
-    vooruit();
-    delay(500);
-    }*/
-    /*
-    delay(550);
-    turnLeft();
-    vooruit();
-    delay(500);*//*
-  }
+   }
+   
+ }
 
-  if((sensor0() <= 10 || sensor1() >= 7) && sensor2() <=13){ //muur voor of afgrond voor en muur links
-    turnRight();
-  }
-  */
-}
  
+ if((sensor0() < 8 && sensor0() > 0 || sensor1() >= 9 ) && sensor2() > 13){ //afgrond of muur, links geen muur.
+
+   if(sensor1() >= 9) { //indien afgrond ga eerst achteruit.
+      achteruit();
+      delay(400);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+   }
+      vooruit();
+      delay(430);
+      turnLeft();
+      vooruit();
+      delay(430);
+ }
+
+}
+
 int sensor0(){
   int duration, distance;
   digitalWrite(trigPin1, LOW);  
@@ -149,5 +155,24 @@ void turnLeft(){
  left.writeMicroseconds(1532);
  right.writeMicroseconds(1505);
  delay(450);
+}
+
+void checkDL(){
+ left.writeMicroseconds(1550);
+ right.writeMicroseconds(100);
+}
+
+void checkDR(){
+ left.writeMicroseconds(1580);
+ right.writeMicroseconds(300);
+}
+
+void center(){
+    if(sensor2() < 7){
+      checkDR();
+    }
+    else if(sensor2() >= 7){
+      checkDL();
+    }
 }
 
