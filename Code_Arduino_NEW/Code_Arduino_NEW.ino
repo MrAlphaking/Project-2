@@ -25,7 +25,7 @@ void setup() {
 }
 
 void loop() {
- if(sensor0() > 8 || sensor1() < 9){ //geen muur of geen afgrond voor.
+ if(sensor0() > 10 || sensor1() < 9){ //geen muur of geen afgrond voor.
 
   if(sensor2() <= 13){ //muur links.
    center();
@@ -41,35 +41,23 @@ void loop() {
  }
 
 
- if((sensor0() < 8 && sensor0() > 0 || sensor1() >= 9) && sensor2() <= 13 ){ //muur of afgrond en muur links.
+ if((sensor0() < 10 && sensor0() > 0 || sensor1() >= 9) && sensor2() <= 13 ){ //muur of afgrond en muur links.
   
     if(sensor1() >= 9) { //indien afgrond ga eerst achteruit.
       achteruit();
       delay(400);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-   }
-
+    }
    turnRight();
-   vooruit();
-   delay(500);
+   
    if (sensor0() > 8){
     vooruit();
     delay(200);
    }
    
- }
-
- 
- if((sensor0() < 8 && sensor0() > 0 || sensor1() >= 9 ) && sensor2() > 13){ //afgrond of muur, links geen muur.
-
-   if(sensor1() >= 9) { //indien afgrond ga eerst achteruit.
-      achteruit();
-      delay(400);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+   else if(sensor0() <= 8){
+      turnRight();
    }
-      vooruit();
-      delay(430);
-      turnLeft();
-      vooruit();
-      delay(430);
+   
  }
 
 }
