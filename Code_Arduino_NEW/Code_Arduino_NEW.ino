@@ -42,16 +42,24 @@ void loop() {
 
 
  if((sensor0() < 10 && sensor0() > 0 || sensor1() >= 9) && sensor2() <= 13 ){ //muur of afgrond en muur links.
-  
+  /*int i = 0;*/
     if(sensor1() >= 9) { //indien afgrond ga eerst achteruit.
       achteruit();
-      delay(400);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+      delay(400);    
+      /*i=1; */                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
     }
    turnRight();
    
    if (sensor0() > 8){
     vooruit();
     delay(200);
+    /*if(i=1){
+      checkDR();
+      delay(2000);
+      achteruit();
+      delay(300);
+      turnRight();
+    }*/
    }
    
    else if(sensor0() <= 8){
