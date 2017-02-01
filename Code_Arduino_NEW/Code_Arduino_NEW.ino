@@ -27,7 +27,8 @@ void setup() {
 }
 
 void loop() {
- if(sensor0() > 10 || sensor1() < 9){ //geen muur of geen afgrond voor.
+
+ if(sensor0() >= 10 || sensor1() < 9){ //geen muur of geen afgrond voor.
 
   if(sensor2() <= 13){ //muur links.
    center();
@@ -40,8 +41,7 @@ void loop() {
     vooruit();
     delay(430);
   }
- }
-
+}
 
  if((sensor0() < 10 && sensor0() > 0 || sensor1() >= 9) && sensor2() <= 13 ){ //muur of afgrond en muur links.
     int i = 0;
@@ -52,45 +52,22 @@ void loop() {
     }
    turnRight();
    
-   /*if (sensor0() > 8){
+   if (sensor0() > 8){ //rij tegen de muur aan die aan de rechterkant van de greppel staat.
     vooruit();
     delay(200);
     if(i == 1){
-      checkDR();
+      slideR();
       delay(2000);
       achteruit();
       delay(300);
       turnRight();
-<<<<<<< Updated upstream
       i = 0;
-=======
->>>>>>> Stashed changes
     }
    }
-    else if(sensor0() <= 8){
+    else if(sensor0() <= 8){ //indien de robot bij de muur is gekomen, draai nog een keer rechts.
       turnRight();
-   }*/
-  if(sensor1() > 9){
-   int counter = 0;
-   for(int i = 0; i < 100; i++){
-    
-    if(sensor0() > 8){
-      checkDR();
-    }
-
-    if(sensor0() <= 8){
-      turnRight();
-      counter++;
-    }
-
-    if(counter >= 1){
-      Stop();
-    }
-    
    }
-  }
  }
-
 }
 
 int sensor0(){
@@ -103,10 +80,11 @@ int sensor0(){
   duration = pulseIn(echoPin1, HIGH);
   distance = (duration/2) / 29.1;
   Serial.println("Sensor 0");
-  Serial.println(distance);
+  //Serial.println(distance);
   if(distance < 0){ //indien distance negatief is.
-    distance = 0;
+    distance = 13;
   }
+    Serial.println(distance);
     return distance;
 }
 
@@ -122,7 +100,7 @@ int sensor1(){
   Serial.println("Sensor 1");
   Serial.println(distance);
   if(distance < 0){ //indien distance negatief is.
-    distance = 0;
+    distance = 10;
   }
     return distance;
 }
@@ -178,7 +156,7 @@ void turnLeft(){
 
 void checkDL(){
  left.writeMicroseconds(1550);
- right.writeMicroseconds(100);
+ right.writeMicroseconds(40);
 }
 
 void checkDR(){
@@ -186,11 +164,15 @@ void checkDR(){
  right.writeMicroseconds(300);
 }
 
+void slideR(){
+ left.writeMicroseconds(1585);
+ right.writeMicroseconds(300);
+}
 void center(){
-    if(sensor2() < 7){
+    if(sensor2() < 6){
       checkDR();
     }
-    else if(sensor2() >= 7){
+    else if(sensor2() > 7){
       checkDL();
     }
 }
