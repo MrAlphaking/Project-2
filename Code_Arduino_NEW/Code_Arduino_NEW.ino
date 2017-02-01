@@ -51,7 +51,7 @@ void loop() {
     }
    turnRight();
    
-   if (sensor0() > 8){
+   /*if (sensor0() > 8){
     vooruit();
     delay(200);
     if(i == 1){
@@ -60,14 +60,34 @@ void loop() {
       achteruit();
       delay(300);
       turnRight();
+<<<<<<< Updated upstream
       i = 0;
+=======
+>>>>>>> Stashed changes
     }
    }
-   
-   else if(sensor0() <= 8){
+    else if(sensor0() <= 8){
       turnRight();
+   }*/
+  if(sensor1() > 9){
+   int counter = 0;
+   for(int i = 0; i < 100; i++){
+    
+    if(sensor0() > 8){
+      checkDR();
+    }
+
+    if(sensor0() <= 8){
+      turnRight();
+      counter++;
+    }
+
+    if(counter >= 1){
+      Stop();
+    }
+    
    }
-   
+  }
  }
 
 }
