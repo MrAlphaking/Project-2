@@ -22,7 +22,6 @@ void setup() {
  right.attach(5);
  Stop();
  delay(3000);
- //hoi
  
 }
 
@@ -106,8 +105,8 @@ int sensor1(){
 }
 
 
-int sensor2(){
-  int duration, distance;
+double sensor2(){
+  double duration, distance;
   digitalWrite(trigPin3, LOW);  
   delayMicroseconds(2); 
   digitalWrite(trigPin3, HIGH);
@@ -165,14 +164,14 @@ void checkDR(){
 }
 
 void slideR(){
- left.writeMicroseconds(1585);
- right.writeMicroseconds(300);
+ left.writeMicroseconds(1580);
+ right.writeMicroseconds(200);
 }
 void center(){
-    if(sensor2() < 6){
+    if(sensor2() < 7){
       checkDR();
     }
-    else if(sensor2() > 7){
+    else if(sensor2() >= 7){
       checkDL();
     }
 }
